@@ -5,19 +5,22 @@ function StudentRequestFund(){
     const [funds, setFunds] = useState(0)
     const [studEmail, setStudEmail] = useState('')
     const [reasonForFunding, setReason] = useState('')
+    const [gpa, setGpa] = useState(0)
     const API_BASE_URL = 'http://localhost:8080/api/users'
     const API_UNIVERSITY_URL = 'http://localhost:8080/api/univ'
 
     const handleChange = (val) => {
-        console.log("The value is to be changed " + val)
-        setFunds(val)
+        console.log(val)
+        console.log("Before setting funds " + funds)
+        setFunds(val.target.value)
+        console.log("After setting funds " + funds)
     }
 
     const handleEmailChange = async (val) => {
         try{
-            setStudEmail(val)
-            const response = await axios.post(API_BASE_URL, {studEmail})
-            return response.data
+            setStudEmail(val.target.value)
+            //const response = await axios.post(API_BASE_URL, {studEmail})
+            //return response.data
         } catch( error ){
             console.error('Error retrieving data using handleEmailChange() ', error)
             throw error
@@ -37,15 +40,26 @@ function StudentRequestFund(){
 
     const handleReasonChange = (val) => {
         console.log("The handleReasonChange() is called ")
-        setReason(val)
+        setReason(val.target.value)
     }
 
-    const createFormRequest = async () => {
-        try{
-            const email = {studEmail}
-            return email
-        } catch ( error ) {
+    const handleGpaChange = (val) => {
+        console.log("The handleGpaChange() is called ")
+        setGpa(val.target.value)
+    }
 
+    const createFormRequest = () => {
+        try{
+            const request = {
+                "username": studEmail,
+                "fundingReason":reasonForFunding,
+                "fundingAmount":funds,
+                "gpa":gpa
+            }
+            console.log(request)
+            return request
+        } catch ( error ) {
+            console.log("The error in createFormRequest is " + error)
         }
     }
 
@@ -53,7 +67,7 @@ function StudentRequestFund(){
         <>  
             <div>
                 <h2>Request Funds</h2>
-                <form>
+                
                 <label>Funds Required: </label>
                 <input
                     type="text"
@@ -80,8 +94,17 @@ function StudentRequestFund(){
                     value={reasonForFunding}
                     onChange={handleReasonChange}
                     required></input>
+                <label>GPA: </label>
+                <input
+                    type="text"
+                    id="gpa"
+                    name="gpa"
+                    value={gpa}
+                    onChange={handleGpaChange}
+                    required
+                    ></input>
                 <button type="submit" onClick={handleFundRequest}>Request Fund</button>
-                </form>
+                
             </div>
         </>
     );
