@@ -6,9 +6,10 @@ import axios from 'axios'
 function RegisterDonorForm() {
 
     const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
 
     const handleSubmit = async() => {
         try{
@@ -25,10 +26,14 @@ function RegisterDonorForm() {
     const createFormRequest = () => {
         try{
             const request = {
-                "name": name,
-                "email": email,
+
                 "username": username,
-                "password": password
+                "password": password,
+                "confirmPassword": confirmPassword,
+                "role": "ROLE_DONOR",
+                "active": true,
+                "phoneNumber": phoneNumber,
+                "name": name
             }
             console.log(request)
             return request
@@ -40,15 +45,6 @@ function RegisterDonorForm() {
     const handleNameChange = async(value) => {
         try{
             setName(value.target.value)
-        } catch( error ){
-            console.error('Error retrieving data using handleUsername() ', error)
-            throw error
-        }
-    };
-
-    const handleEmailChange = async(value) => {
-        try{
-            setEmail(value.target.value)
         } catch( error ){
             console.error('Error retrieving data using handleUsername() ', error)
             throw error
@@ -73,10 +69,27 @@ function RegisterDonorForm() {
         }
     };
 
+    const handleConfirmPasswordChange = async(value) => {
+        try{
+            setConfirmPassword(value.target.value)
+        } catch( error ){
+            console.error('Error retrieving data using handleUsername() ', error)
+            throw error
+        }
+    };
+
+    const handlePhoneNumberChange = async(value) => {
+        try{
+            setPhoneNumber(value.target.value)
+        } catch( error ){
+            console.error('Error retrieving data using handleUsername() ', error)
+            throw error
+        }
+    };
 
     const navigate = useNavigate();
 
-    const handleNavigateToAnotherComponent = () => {
+    const handleNavigateToSignIn = () => {
         navigate('/');
     };
 
@@ -84,7 +97,7 @@ function RegisterDonorForm() {
 
         <div>
         <h2>Donor Registration</h2>
-        <form onSubmit={handleSubmit}>
+
             <p style={{color:"red"}}>* indicates the required fields</p>
             <div>
             <label htmlFor="name">Full Name*</label>
@@ -98,18 +111,7 @@ function RegisterDonorForm() {
             />
             </div>
             <div>
-            <label htmlFor="email">Educational Email*</label>
-            <input
-                type="text"
-                id="email"
-                name="email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-            />
-            </div>  
-            <div>
-            <label htmlFor="username">Username*</label>
+            <label htmlFor="username">Email*</label>
             <input
                 type="text"
                 id="username"
@@ -118,7 +120,7 @@ function RegisterDonorForm() {
                 onChange={handleUsernameChange}
                 required
             />
-            </div>
+            </div>  
             <div>
             <label htmlFor="password">Password*</label>
             <input
@@ -130,10 +132,32 @@ function RegisterDonorForm() {
                 required
             />
             </div>
-            <button type="submit">Submit</button>
-        </form>
+            <div>
+            <label htmlFor="confirmPassword">Confirm Password*</label>
+            <input
+                type="confirmPassword"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                required
+            />
+            </div>
+            <div>
+            <label htmlFor="phoneNumber">Phone Number*</label>
+            <input
+                type="phoneNumber"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                required
+            />
+            </div>
+
+            <button type="submit" onClick={handleSubmit}>Submit</button>
         <div>
-            <button onClick={handleNavigateToAnotherComponent}>Cancel</button>
+            <button onClick={handleNavigateToSignIn}>Cancel</button>
         </div>
         </div>
     )
