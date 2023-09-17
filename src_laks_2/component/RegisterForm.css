@@ -1,0 +1,20 @@
+input[type="text"],
+input[type="username"], 
+input[type="password"] {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: auto;
+}
+
+.register-form {
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+    padding-right: 30px;
+    /* padding-right: auto; */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
