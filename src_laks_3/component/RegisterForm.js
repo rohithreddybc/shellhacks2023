@@ -38,7 +38,7 @@ function RegisterForm() {
 
     const createFormRequest = () => {
         try{
-            console.log("RACEEEEEEE is",selectedValue);
+            console.log(selectedValue);
             const request = {
                 "name": name,
                 "userName": userName,
@@ -243,58 +243,6 @@ function RegisterForm() {
                         <option value="Wh">White</option>
                     </select>
            
-            {/* <div>
-                <p required>Identify your race:(you can choose more than if applicable)*</p>
-                <label>
-                    American Indian or Alaska Native
-                    <input
-                    type="checkbox"
-                    name="AIAN"
-                    checked={checkboxes.AIAN || false}
-                    onChange={handleCheckboxChange}
-                    />
-                </label>
-
-                <label>
-                    Asian
-                    <input
-                    type="checkbox"
-                    name="AN"
-                    checked={checkboxes.AN || false}
-                    onChange={handleCheckboxChange}
-                    />
-                </label>
-
-                <label>
-                    Black or African American
-                    <input
-                    type="checkbox"
-                    name="BAA"
-                    checked={checkboxes.BAA || false}
-                    onChange={handleCheckboxChange}
-                    />
-                </label>
-
-                <label>
-                    Native Hawaiian or Other Pacific Islander
-                    <input
-                    type="checkbox"
-                    name="NHPH"
-                    checked={checkboxes.NHPH || false}
-                    onChange={handleCheckboxChange}
-                    />
-                </label>
-
-                <label>
-                    White
-                    <input
-                    type="checkbox"
-                    name="Wh"
-                    checked={checkboxes.Wh || false}
-                    onChange={handleCheckboxChange}
-                    />
-                </label>
-            </div> */}
             <button type="submit">Submit</button>
         </form>
         <div>
