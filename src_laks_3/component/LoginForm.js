@@ -4,13 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginForm() {
-  const [username, setUsername] = useState('')
+  const [userName, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = async() => {
     try{
       const request = createFormRequest()
+      console.log(request)
       const response = await axios.post("http://localhost:8080/api/users", {request})
+
+      localStorage.setItem("userName", userName)
+      
       return response.data
     } catch( error ){
         console.error("We are receiving the following error in handleFundRequest() "+ error)
@@ -57,15 +61,12 @@ function LoginForm() {
   const handleNavigateToSignUpDonor = () => {
     navigate('/registerDonorForm');
   };
-  const handleNavigateToLogInDonor = () => {
-    navigate('/LoginDonorForm');
-  }
+
   const paperStyle = {padding:20, height:'70vh', margin:"20px auto"}
 
   return (
     <div className="main-div">
-      <button className="button" onClick={handleNavigateToLogInDonor}>Login as a Donor</button>
-      <h2>Student Login</h2>
+      <h2>Login</h2>
       <form className="login-form " onSubmit={handleSubmit} >
         <div>
           <label htmlFor="username">Username</label>
@@ -93,7 +94,7 @@ function LoginForm() {
       
       <div>
         <button className="button" type="submit" onClick={handleNavigateToSignUpStudent}>Sign Up as Student</button>
-        <button className="button" type="submit" sonClick={handleNavigateToSignUpDonor}>Sign Up as Donor</button>
+        <button className="button" type="submit" onClick={handleNavigateToSignUpDonor}>Sign Up as Donor</button>
       </div> 
       </form>     
     </div>
